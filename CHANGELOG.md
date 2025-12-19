@@ -4,7 +4,16 @@ All notable changes to AudioSeal are documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [0.1.5 - 0.1.7] - 2025-04-29
+
+## [0.2.0] - 2025-12-09
+
+- Add new models with streaming support (`audioseal_wm_streaming`, `audioseal_detector_streaming`)
+- Refactor code to make the functions torchscriptable
+- Deprecate the internal resampling during watermark generation and detection
+- Fix bugs in load user-defined secret messages with mis-matching batch size
+- Update example notebooks
+
+## [0.1.5 - 0.1.8] - 2025-04-29
 
 - Fix bugs in loading model in new PyTorch (2.6+)
 - Add support for loading from other HF spaces

@@ -251,6 +251,18 @@ audioseal/
 3. **JIT scripting**: Models support `torch.jit.script` for deployment
 4. **Streaming**: Use `model.streaming(batch_size=N)` context manager for streaming audio
 
+### Training & Model Usage
+
+1. **Training Code**: The project does not include training code. Training is done via [AudioCraft](https://github.com/facebookresearch/audiocraft). See `docs/TRAINING.md` for details.
+
+2. **When to Train Custom Models**: Use pretrained 16-bit models for most cases. Train custom models when:
+   - Different watermark capacity needed (more/less bits)
+   - Optimizing for specific audio types
+   - Enhanced robustness against specific attacks
+   - Academic research or commercial customization
+
+3. **Music Support**: Not supported. AudioSeal is designed for speech audio (trained on Librispeech, Voxpopuli). Music may have reduced invisibility and detection rates. Train with music datasets for music watermarking support.
+
 ### Key Dependencies
 
 - `torch >= 1.13.0`

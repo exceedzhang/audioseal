@@ -1,6 +1,6 @@
 # For developers wanting to contribute to AudioSeal
 fire
-torchaudio
+torchaudio==2.1.0
 soundfile
 pytest
 mypy
@@ -9,3 +9,4 @@ isort
 flake8
 pre-commit
 huggingface_hub
+numpy<2.0

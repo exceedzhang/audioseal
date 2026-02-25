@@ -1,4 +1,6 @@
-  numpy
-  omegaconf
-  torch>=1.13.0
-  einops; python_version >= "3.10"
+numpy<2.0
+omegaconf
+torch>=1.13.0
+torchaudio==2.1.0
+soundfile
+einops; python_version >= "3.10"

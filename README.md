@@ -71,7 +71,24 @@ Note that the message is optional and has no influence on the detection output. 
 
 # :abacus: Usage
 
-Here’s a quick example of how you can use AudioSeal’s API to embed and detect watermarks:
+### Command Line
+
+The project includes an example script for watermark detection and addition:
+
+```bash
+# Detect watermark only (no addition)
+python watermark_example.py input.wav --detect-only
+
+# Detect + add watermark
+python watermark_example.py input.wav
+
+# Specify output file and watermark message
+python watermark_example.py input.wav -o output.wav -m "my message"
+```
+
+### Python API
+
+Here's a quick example of how you can use AudioSeal's API to embed and detect watermarks:
 
 ```python
 
@@ -161,6 +178,23 @@ See [example notebook](examples/Getting_started.ipynb) for full details.
 # :brain: Train your own watermarking model
 
 See [here](./docs/TRAINING.md) for details on how to train your own Watermarking model.
+
+
+# :flask: Experiments
+
+We conducted 5 experiments on watermarked audio files (20260210_012_WM_1.WAV ~ WM_5.WAV):
+
+| Experiment | Operation | Detection Success Rate |
+|------------|-----------|----------------------|
+| 1 | Clip a portion from original audio | ✅ Success |
+| 2 | Increase volume by +5dB | ✅ Success |
+| 3 | Speed change 0.8x | ❌ < 0.36 |
+| 4 | Speed change 0.9x | ❌ < 0.36 |
+| 5 | Swap front and back segments | ❌ < 0.21 |
+
+**Findings:**
+- AudioSeal is robust against volume adjustments and audio clipping
+- Speed change and segment swapping significantly degrade watermark detection
 
 
 # See Also

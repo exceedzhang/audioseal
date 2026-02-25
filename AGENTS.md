@@ -279,11 +279,14 @@ The project includes an example script for adding and detecting watermarks:
 
 **Usage**:
 ```bash
-# Basic usage
+# Basic usage (detect + add watermark)
 python watermark_example.py input.wav
 
 # Specify output file and watermark message
 python watermark_example.py input.wav -o output.wav -m "my message"
+
+# Detect watermark only (no addition)
+python watermark_example.py input.wav --detect-only
 
 # View help
 python watermark_example.py --help
@@ -291,9 +294,11 @@ python watermark_example.py --help
 
 **Features**:
 - Auto-resample audio to 16kHz
+- Auto-convert stereo to mono
 - Detect if audio already has watermark (skip if already watermarked)
 - Embed custom 16-bit message
 - Save as WAV format
+- Detect-only mode (--detect-only)
 
 **Key Functions**:
 - `load_and_resample_audio()` - Load audio and resample to 16kHz

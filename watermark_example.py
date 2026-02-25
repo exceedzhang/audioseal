@@ -50,6 +50,10 @@ def load_and_resample_audio(
         sr = target_sr
         print(f"Resampled from {sr}Hz to {target_sr}Hz")
 
+    if wav.shape[0] > 1:
+        wav = wav.mean(dim=0, keepdim=True)
+        print("Converted stereo to mono")
+
     wav = wav.unsqueeze(0)
 
     return wav, sr
@@ -162,11 +166,39 @@ def main():
     parser.add_argument(
         "-m", "--message", default="exceed", help="Watermark message to embed"
     )
+    parser.add_argument(
+        "--detect-only", action="store_true", help="Only detect watermark, do not add"
+    )
     args = parser.parse_args()
 
     input_file = args.input_file
     output_file = args.output
     watermark_message = args.message
+    detect_only = args.detect_only
+
+    if detect_only:
+        print("=" * 50)
+        print("AudioSeal Watermark Detection")
+        print("=" * 50)
+
+        print("\n[1/3] Loading detector model...")
+        detector = AudioSeal.load_detector("audioseal_detector_16bits")
+        print("Model loaded successfully.")
+
+        print("\n[2/3] Loading and processing audio...")
+        audio, sr = load_and_resample_audio(input_file)
+        print(f"Audio shape: {audio.shape}, Sample rate: {sr}Hz")
+
+        print("\n[3/3] Detecting watermark...")
+        is_valid, prob, detect_time = detect_watermark(audio, sr, detector)
+        print(f"  Watermark detected: {is_valid}")
+        print(f"  Probability: {prob:.4f}")
+        print(f"  Time taken: {detect_time:.4f} seconds")
+
+        print("\n" + "=" * 50)
+        print("Done!")
+        print("=" * 50)
+        return
 
     print("=" * 50)
     print("AudioSeal Watermarking Example")
